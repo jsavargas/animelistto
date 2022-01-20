@@ -1,0 +1,8 @@
+flask
+requests
+xmltodict
+tqdm
+beautifulsoup4
+selenium==3.11
+pyvirtualdisplay==0.2.1
+webdriver-manager

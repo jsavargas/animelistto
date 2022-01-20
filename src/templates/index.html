@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{token}}</h1>
+
+
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+    {% for d in data %}
+    <div class="card float-right">
+        <div class="row">
+            <div class="col-sm-2">
+                <img class="thumb p-2"
+                    src="{{d.img_src}}" alt="" />
+            </div>
+            <div class="col-sm-10">
+                <div class="card-block">
+                    <h4 class="card-title">{{d.name}}</h4>
+                    <div class="row">
+
+                        <div class="col-md-8">
+                            <ul>
+                                <li>description: {{ d.description | safe }}</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-5">
+                            <ul>
+                                <li>Next Airing Episode: {{ d.airing }}</li>
+                                <li>episodes: {{ d.episodes }}</li>
+                                <li>status: {{ d.status }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5">
+                            <ul>
+                                <li>Season: {{ d.season }}</li>
+                            </ul>
+                        </div>
+
+
+
+                    </div>
+                    <p>
+                    </p>
+
+
+                        
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
