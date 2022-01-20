@@ -25,24 +25,26 @@
             <div class="col-sm-10">
                 <div class="card-block">
                     <h4 class="card-title">{{d.name}}</h4>
+                    <h6 class="card-title">{{d.romaji}}</h6>
+                    <h6 class="card-title"><a href="{{d.idMal}}">{{d.idMal}}</a></h6>
                     <div class="row">
 
-                        <div class="col-md-8">
-                            <ul>
-                                <li>description: {{ d.description | safe }}</li>
-                            </ul>
+                        <div class="col-md-12 description">
+                            {{ d.description | safe }}
                         </div>
-
-                        <div class="col-md-5">
-                            <ul>
-                                <li>Next Airing Episode: {{ d.airing }}</li>
-                                <li>episodes: {{ d.episodes }}</li>
-                                <li>status: {{ d.status }}</li>
-                            </ul>
-                        </div>
+                        <p>
                         <div class="col-md-5">
                             <ul>
                                 <li>Season: {{ d.season }}</li>
+                                <li>Next Airing Episode: {{ d.airing }}</li>
+                                <li>episodes: {{ d.episodes }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5">
+                            <ul>
+                                <li>status: {{ d.status }}</li>
+                                <li>startDate: {{ d.startDate }}</li>
+                                <li>endDate: {{ d.endDate }}</li>
                             </ul>
                         </div>
 

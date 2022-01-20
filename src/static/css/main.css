@@ -64,3 +64,9 @@ img.thumb {
     padding-left:30px;
     padding-right:30px;
   }
+
+  .description {
+    text-align:justify;
+    text-justify:values;
+      }
+  

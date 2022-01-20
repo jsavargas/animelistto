@@ -13,7 +13,7 @@ from selenium.webdriver.common.by import By
 
 
 
-def getAnimeList():
+def getList():
 
 
     """Start web driver"""
@@ -57,4 +57,213 @@ def scrollDown(driver, value):
     driver.execute_script("window.scrollBy(0,"+str(value)+")")
 
 
+def getSeasonAnimeList(page=1,perPage=50,seasonYear=2022):
 
+
+    season = setSeasonFields()
+    seasonYear = seasonYear if seasonYear else setYearFields()
+    
+    '''
+    TODO: season
+
+    WINTER
+    Months December to February
+
+    SPRING
+    Months March to May
+
+    SUMMER
+    Months June to August
+
+    FALL
+    Months September to November
+    '''
+
+    query = ''' 
+        query ($page: Int, $perPage: Int) {
+            Page(page: $page, perPage: $perPage) {
+            pageInfo {
+                total
+                currentPage
+                lastPage
+                hasNextPage
+                perPage
+            }
+                media(type: ANIME, seasonYear: %d, season: %s, format: TV, sort: [TRENDING_DESC, STATUS]) {
+                id
+                idMal
+                title {
+                    romaji
+                    english
+                    native
+                    userPreferred
+                }
+                startDate {
+                    year
+                    month
+                    day
+                }
+                endDate {
+                    year
+                    month
+                    day
+                }
+                coverImage {
+                    extraLarge
+                    large
+                    medium
+                }
+                bannerImage
+                format
+                type
+                status
+                episodes
+                chapters
+                volumes
+                season
+                description
+                averageScore
+                meanScore
+                genres
+                synonyms
+                hashtag
+                source
+                isAdult
+                isFavourite
+                nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+                }
+                siteUrl
+                
+            }
+        }
+        }
+    ''' % (2022, 'WINTER')
+
+    variables = {
+        'page': page,
+        'perPage': perPage
+    }
+    url = 'https://graphql.anilist.co'
+
+    response = requests.post(url, json={'query': query, 'variables': variables})
+    return response
+
+def getYearAnimeList(page=1,perPage=50,year=2022):
+
+
+    season = setSeasonFields()
+    seasonYear = year if year else setYearFields()
+
+
+    '''
+    TODO: season
+
+    WINTER
+    Months December to February
+
+    SPRING
+    Months March to May
+
+    SUMMER
+    Months June to August
+
+    FALL
+    Months September to November
+    '''
+
+    query = ''' 
+        query ($page: Int, $perPage: Int) {
+            Page(page: $page, perPage: $perPage) {
+            pageInfo {
+                total
+                currentPage
+                lastPage
+                hasNextPage
+                perPage
+            }
+                media(type: ANIME, seasonYear: %d, season: %s, format: TV, sort: [TRENDING_DESC, STATUS]) {
+                id
+                idMal
+                title {
+                    romaji
+                    english
+                    native
+                    userPreferred
+                }
+                startDate {
+                    year
+                    month
+                    day
+                }
+                endDate {
+                    year
+                    month
+                    day
+                }
+                coverImage {
+                    extraLarge
+                    large
+                    medium
+                }
+                bannerImage
+                format
+                type
+                status
+                episodes
+                chapters
+                volumes
+                season
+                description
+                averageScore
+                meanScore
+                genres
+                synonyms
+                hashtag
+                source
+                isAdult
+                isFavourite
+                nextAiringEpisode {
+                airingAt
+                timeUntilAiring
+                episode
+                }
+                siteUrl
+                
+            }
+        }
+        }
+    ''' % (seasonYear, season)
+
+    variables = {
+        'page': page,
+        'perPage': perPage
+    }
+    url = 'https://graphql.anilist.co'
+
+    response = requests.post(url, json={'query': query, 'variables': variables})
+    return response
+
+
+def setSeasonFields():
+    currentDay = datetime.now().day
+    currentMonth = datetime.now().month
+    currentYear = datetime.now().year
+
+    match currentMonth:
+        case 12 | 1 | 2:
+            return 'WINTER'
+        case 3 | 4 | 5:
+            return 'SPRING'
+        case 6 | 7 | 8:
+            return 'SUMMER'
+        case 9 | 10 | 11:
+            return 'FALL'
+
+def setYearFields():
+    currentDay = datetime.now().day
+    currentMonth = datetime.now().month
+    currentYear = datetime.now().year
+    return currentYear
