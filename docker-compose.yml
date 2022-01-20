@@ -12,4 +12,4 @@ services:
     volumes:
       - /mnt/user/appdata/animerr:/config
     ports:
-      - "5757:5000"
+      - "5757:5757"
