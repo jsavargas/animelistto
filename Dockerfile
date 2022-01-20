@@ -1,9 +1,9 @@
-FROM python:3.9.1-alpine
+FROM python:3.10.2-alpine
 
 WORKDIR /code
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-
+ENV FLASK_RUN_PORT=5757
 
 
 # update apk repo
