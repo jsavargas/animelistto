@@ -1,0 +1,12 @@
+.git
+.gitignore
+.github
+.gitattributes
+README.md
+
+#
+__pycache__
+
+#
+.env
+*~

@@ -1,0 +1,13 @@
+#python 
+
+__pycache__
+
+#vscode
+.vscode
+NOTAS.txt
+.env
+
+
+#
+*.bak
+*~
