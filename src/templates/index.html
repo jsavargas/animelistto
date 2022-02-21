@@ -15,20 +15,160 @@
 
 <div class="container">
 
+    <div class="col-sm-12">
+
+        <div class="form-group row">
+
+            <div class="col-sm-3">
+                <label for="inputPassword4">root folders</label>
+                <select id="inputState" class="form-control">
+                    {% for root_folder in root_folders %}
+                    <option value="{{root_folder.id}}">{{root_folder.path}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="inputPassword4">Tags</label>
+                <select id="inputState" class="form-control">
+                    <option selected></option>
+                    {% for all_tag in all_tags %}
+                    <option value="{{all_tag.id}}">{{all_tag.label}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="inputPassword4">Quality Profile</label>
+                <select id="inputState" class="form-control">
+                    {% for profile in quality_profile_id %}
+                    <option value="{{profile.id}}">{{profile.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="inputPassword4">Monitor</label>
+                <select id="inputState" class="form-control" name="monitor">
+                    <option value="all">All Episodes</option>
+                    <option value="future">Future Episodes</option>
+                    <option value="missing">Missing Episodes</option>
+                    <option value="existing">Existing Episodes</option>
+                    <option value="pilot">Pilot Episode</option>
+                    <option value="firstSeason">Only First Season</option>
+                    <option value="latestSeason">Only Latest Season</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="inputPassword4">Series Type</label>
+                <select class="form-control" name="seriesType">
+                    <option value="standard">Standard</option>
+                    <option value="daily">Daily</option>
+                    <option value="anime">Anime</option>
+                </select>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
     {% for d in data %}
     <div class="card float-right">
+
+
+
+
+
+
+
+
+
+
         <div class="row">
             <div class="col-sm-2">
-                <img class="thumb p-2"
-                    src="{{d.img_src}}" alt="" />
+                <img class="thumb p-2" src="{{d.img_src}}" alt="" />
             </div>
             <div class="col-sm-10">
                 <div class="card-block">
                     <h4 class="card-title">{{d.name}}</h4>
-                    <h6 class="card-title">{{d.romaji}}</h6>
-                    <h6 class="card-title"><a href="{{d.idMal}}">{{d.idMal}}</a></h6>
+                    <h6 class="card-title">{{d.romaji}} <a href="{{d.idMal}}">{{d.idMal}}</a></h6>
                     <div class="row">
+                        <div class="col-sm-12">
 
+                            <div class="form-group row">
+                                <div class="col-sm-4">
+                                    <label for="inputPassword4">Series <i
+                                            onclick="searchSonarr('{{ d.id }}','{{ d.name_format }}')"
+                                            class="fas fa-search"></i>
+                                    </label>
+                                    <select id="inputSeries-{{ d.id }}" class="form-control">
+                                        <option selected>Choose...</option>
+                                        {% for s in d.sonarr %}
+                                        <option>{{s.title}} ({{s.year}}) {{s.network}} [{{s.profileId}}]</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div id="box1" class="col-sm-4" style="padding-top: 23px !important">
+                                    <button type="button" class="btn btn-success">Success</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <div class="form-group row">
+
+                                <div class="col-sm-3">
+                                    <label for="inputPassword4">root folders</label>
+                                    <select id="inputState" class="form-control">
+                                        {% for root_folder in root_folders %}
+                                        <option value="{{root_folder.id}}">{{root_folder.path}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="inputPassword4">Tags</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected></option>
+                                        {% for all_tag in all_tags %}
+                                        <option value="{{all_tag.id}}">{{all_tag.label}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="inputPassword4">Quality Profile</label>
+                                    <select id="inputState" class="form-control">
+                                        {% for profile in quality_profile_id %}
+                                        <option value="{{profile.id}}">{{profile.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="inputPassword4">Monitor</label>
+                                    <select id="inputState" class="form-control" name="monitor">
+                                        <option value="all">All Episodes</option>
+                                        <option value="future">Future Episodes</option>
+                                        <option value="missing">Missing Episodes</option>
+                                        <option value="existing">Existing Episodes</option>
+                                        <option value="pilot">Pilot Episode</option>
+                                        <option value="firstSeason">Only First Season</option>
+                                        <option value="latestSeason">Only Latest Season</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="inputPassword4">Series Type</label>
+                                    <select class="form-control" name="seriesType">
+                                        <option value="standard">Standard</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="anime">Anime</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <p>
                         <div class="col-md-12 description">
                             {{ d.description | safe }}
                         </div>
@@ -38,6 +178,8 @@
                                 <li>Season: {{ d.season }}</li>
                                 <li>Next Airing Episode: {{ d.airing }}</li>
                                 <li>episodes: {{ d.episodes }}</li>
+                                <li>next Episode: {{ d.nextAiringEpisode }}</li>
+                                <li>next Airing Episode: {{ d.airingAt }}</li>
                             </ul>
                         </div>
                         <div class="col-md-5">
@@ -55,8 +197,6 @@
                     </p>
 
 
-                        
-
 
                 </div>
             </div>
@@ -64,17 +204,86 @@
 
 
         </div>
+
+
+
+
     </div>
 
     {% endfor %}
 </div>
 
 
-
-
-
-
-
 {% endblock %}
 
 
+{% block footer_scripts %}
+
+
+<script>
+
+    $("#idForm").submit(function (e) {
+
+        alert()
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+var form = $(this);
+var actionUrl = form.attr('action');
+
+$.ajax({
+        type: "POST",
+        url: actionUrl,
+        data: form.serialize(), // serializes the form's elements.
+        success: function(data)
+        {
+          alert(data); // show response from the php script.
+        }
+    });
+
+
+    });
+
+    function searchSonarr(id, name) {
+
+        console.log(id)
+        console.log(name)
+
+        $('#inputSeries-' + id).empty();
+        $('#inputSeries-' + id).append('.... Buscando Información');
+        $("#inputSeries-" + id).append('<option value="search">SEARCH IN SONARR...</option>');
+
+
+
+        $.ajax({
+            url: `/sonarr`,
+            data: { search: name },
+            type: "GET",
+        }).done(function (response) { //
+            $('#inputSeries-' + id).empty();
+            $.each(JSON.parse(response), function (index, itemData) {
+                console.log(itemData.title)
+                //Existing
+                switch (itemData.profileId) {
+                    case 0:
+                        Existing = ''
+                        break;
+                    default:
+                        Existing = 'Existing'
+                    // code block
+                }
+
+                $("#inputSeries-" + id).append(`<option value=${itemData.tvdbId}>${itemData.title} (${itemData.year}) ${itemData.network} [${Existing}]</option>`);
+            });
+
+
+        });
+    }
+
+
+
+
+
+
+</script>
+
+{% endblock %}

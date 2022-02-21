@@ -70,3 +70,9 @@ img.thumb {
     text-justify:values;
       }
   
+
+      .btn ,  #box1, #box2, #box3 {
+        display: inline-block;
+        vertical-align: bottom;
+        }
+        
