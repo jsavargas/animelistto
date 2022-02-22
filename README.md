@@ -1,5 +1,8 @@
 # animelistto
 
+Search and add your animes in broadcast directly to sonarr
+ 
+
 ![](img/example01.png)
 
 
